@@ -68,3 +68,4 @@ void gpio_error_isr(uint gpio, uint32_t events) {
 - RP2040 Datasheet (SPI, GPIO, Timer)  
 - Logic Analyzer Dokumentation (z. B. Saleae, PulseView)  
 - Ampellogik nach StVO  
+- https://chatgpt.com/share/67ee54d9-3010-8011-a7e1-77ee257ae5e2
