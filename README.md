@@ -43,6 +43,22 @@ Die detaillierte [Aufgabenstellung](TASK.md) beschreibt die notwendigen Schritte
   - Header-Datei `traffic_light_control.h` mit Statuscodes, GPIO-Funktionen und Mapping  
   - Flexibel erweiterbar für SPI, Watchdog oder komplexere Überwachung  
 
+## Fehlerbehandlung über GPIO-Interrupt (ISR) - EK
+
+- Über einen externen GPIO (z. B. GPIO16) kann ein Fehlerzustand ausgelöst werden.
+- Die ISR setzt `errorFlag = true` und aktiviert sofort den `ErrorTask`.
+- Gelb blinkt mit 500 ms Intervallen.
+- Während `errorFlag == true` werden alle anderen Tasks blockiert.
+
+### ISR-Ablauf (Interrupt Service Routine):
+
+```c++
+void gpio_error_isr(uint gpio, uint32_t events) {
+    errorFlag = true;
+    vTaskNotifyGiveFromISR(xErrorTask, ...);
+}
+```
+
 ## Quellen  
 - FreeRTOS Demo für Raspberry Pi Pico  
 - RP2040 Datasheet (SPI, GPIO, Timer)  
