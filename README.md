@@ -22,4 +22,4 @@ Die detaillierte [Aufgabenstellung](TASK.md) beschreibt die notwendigen Schritte
 - FreeRTOS Demo für Raspberry Pi Pico  
 - RP2040 Datasheet (SPI, GPIO, Timer)  
 - Logic Analyzer Dokumentation (z. B. Saleae, PulseView)  
-- Ampellogik nach deutscher StVO  
+- Ampellogik nach StVO  
