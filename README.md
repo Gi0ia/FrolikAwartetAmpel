@@ -17,6 +17,10 @@ Die detaillierte [Aufgabenstellung](TASK.md) beschreibt die notwendigen Schritte
 | Gelb            | `1000`       |
 | Gelb blinkend   | `0001`       |
 
+### Gleichrangige Ampel-Tasks (Priorität 1)
+- Alle Tasks (Grün, Grün blinkend, Gelb, Rot, Rot-Gelb) haben die gleiche Priorität.
+- Das bedeutet: FreeRTOS schedult sie nur, wenn sie explizit aktiviert wurden (was du eh per xTaskNotifyGive() machst).
+- Solange kein Fehler vorliegt, laufen die Tasks sequentiell
 
 ## Recherche  
 - Grundlagen zu FreeRTOS auf dem RP2040 (z. B. Raspberry Pi Pico)  
