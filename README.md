@@ -5,6 +5,19 @@
 ## Aufgabenstellung  
 Die detaillierte [Aufgabenstellung](TASK.md) beschreibt die notwendigen Schritte zur Realisierung.
 
+
+## Status-Codierung (4 Bit)
+
+| Phase           | Code (binär) |
+|-----------------|--------------|
+| Rot             | `1110`       |
+| Rot-Gelb        | `1101`       |
+| Grün            | `0010`       |
+| Grün blinkend   | `0101`       |
+| Gelb            | `1000`       |
+| Gelb blinkend   | `0001`       |
+
+
 ## Recherche  
 - Grundlagen zu FreeRTOS auf dem RP2040 (z. B. Raspberry Pi Pico)  
 - GPIO-basierte Bitübertragung als einfache SPI-Alternative  
