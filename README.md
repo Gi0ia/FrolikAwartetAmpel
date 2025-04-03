@@ -7,16 +7,28 @@ Die detaillierte [Aufgabenstellung](TASK.md) beschreibt die notwendigen Schritte
 
 ## Recherche  
 - Grundlagen zu FreeRTOS auf dem RP2040 (z. B. Raspberry Pi Pico)  
-- SPI-Kommunikation zwischen Mikrocontroller und Single-Board-Computer  
-- Zeitkritische Steuerung mit Interrupts und Watchdog  
-- Einsatz eines Logic Analyzers zur Busüberwachung  
+- GPIO-basierte Bitübertragung als einfache SPI-Alternative  
+- Zeitkritische Steuerung mit Interrupts und Task-Prioritäten  
+- Einsatz eines Logic Analyzers zur Protokollanalyse und Fehlerdiagnose  
+- Mapping von Ampelphasen in binäre Statuscodes
 
 ## Implementierung  
-- FreeRTOS-basierte Ampelsteuerung mit separaten Tasks für jede Phase  
-- Fehlerbehandlung via Prioritäts-Task (gelb blinkend bei Fehler)  
-- Modularisierung durch Header (`traffic_light_control.h`)  
-- Vorbereitung für SPI-Übertragung von Statuscodes (mapping & send-Funktion)  
-- Konsolenbasiertes Debugging über USB (stdio)  
+- **FreeRTOS-Taskstruktur:**  
+  - Separate Tasks für Rot, Rot-Gelb, Grün, Grün blinkend, Gelb  
+  - Fehlerzustand (Gelb blinkend) mit höchster Priorität  
+
+- **Bitweise GPIO-Übertragung:**  
+  - 4-Bit-Codes je Ampelphase werden seriell über einen definierten GPIO (z. B. GPIO15) ausgegeben  
+  - Timing: **5 ms pro Bit** → Gesamtübertragung: **20 ms**  
+  - Überwachung mit Logic Analyzer möglich  
+
+- **Fehlerbehandlung:**  
+  - Fehler-Task (blinkend gelb) wird aktiv, wenn `errorFlag == true`  
+  - Zentrale Statusübertragung via `sendBitPattern()`  
+
+- **Modularisierung:**  
+  - Header-Datei `traffic_light_control.h` mit Statuscodes, GPIO-Funktionen und Mapping  
+  - Flexibel erweiterbar für SPI, Watchdog oder komplexere Überwachung  
 
 ## Quellen  
 - FreeRTOS Demo für Raspberry Pi Pico  
